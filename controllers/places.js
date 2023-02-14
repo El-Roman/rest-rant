@@ -1,5 +1,9 @@
 const router = require('express').Router()
 
+// NEW /places
+router.get('/new', (req, res) => {
+    res.render('places/new')
+})
 
 
 // GET /places
