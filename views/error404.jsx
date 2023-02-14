@@ -7,6 +7,9 @@ function error404() {
             <main>
                 <h1>404: PAGE NOT FOUND</h1>
                 <p>Oops, sorry, we can't find this page!</p>
+                <div>
+                    <img src="https://media.tenor.com/mWx9s6SvDv8AAAAd/travolta-heaven.gif" alt="john travolta meme" />
+                </div>
             </main>
         </Def>
     )
