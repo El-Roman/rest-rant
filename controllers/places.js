@@ -6,6 +6,13 @@ router.get('/new', (req, res) => {
 })
 
 
+// POST
+router.post('/', (req, res) => {
+    console.log(req.body)
+    res.send('POST /places')
+})
+
+
 // GET /places
 router.get('/', (req, res) => {
     let places = [{
