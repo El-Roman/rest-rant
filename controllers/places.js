@@ -18,11 +18,14 @@ router.get('/:id', (req, res) => {
         res.render('error404')
     }
     else {
-        res.render('places/show', { place: places[id] })
+        res.render('places/show', { place: places[id], id })
     }
 })
 
-
+// EDIT
+router.get('/:id/edit', (req, res) => {
+    res.render('places/edit')
+})
 
 // POST
 router.post('/', (req, res) => {
