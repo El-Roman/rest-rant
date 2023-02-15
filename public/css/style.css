@@ -1,11 +1,18 @@
-h1 {
+body {
+    background-color: rgb(136, 136, 136);
     text-align: center;
-    color: cornflowerblue;
 }
 
-/* p {
+main {
+    margin-right: 20px;
+    margin-left: 20px;
+    background-color: white;
+}
+
+h1 {
     text-align: center;
-} */
+    color: rgb(255, 255, 255);
+}
 
 img {
     display: block;
@@ -14,6 +21,30 @@ img {
     width: 50%;
 }
 
-/* div {
-    text-align: center;
-} */
+nav {
+    background-color: rgba(46, 46, 46, 0.781);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+}
+
+nav li {
+    display: inline;
+    align-items: center;
+    margin-right: 25px;
+}
+
+nav a {
+    color: rgb(180, 180, 180);
+    font-size: 1.5em;
+}
+
+nav a:hover {
+    color: pink;
+    text-decoration: none;
+}
