@@ -15,14 +15,11 @@ router.get('/new', (req, res) => {
 // EDIT
 router.get('/:id/edit', (req, res) => {
     let id = Number(req.params.id)
-    if (isNaN(id)) {
-        res.render('error404')
-    }
-    else if (!places[id]) {
-        res.render('error404')
+    if (isNaN(id) || !places[id]) {
+        res.render('error')
     }
     else {
-        res.render('places/edit', { place: places[id] })
+        res.render('places/edit', { place: places[id], id })
     }
 })
 
@@ -30,13 +27,9 @@ router.get('/:id/edit', (req, res) => {
 // SHOW
 router.get('/:id', (req, res) => {
     let id = Number(req.params.id)
-    if (isNaN(id)) {
+    if (isNaN(id) || !places[id]) {
         res.render('error404')
-    }
-    else if (!places[id]) {
-        res.render('error404')
-    }
-    else {
+    } else {
         res.render('places/show', { place: places[id], id })
     }
 })
@@ -44,35 +37,22 @@ router.get('/:id', (req, res) => {
 
 // POST
 router.post('/', (req, res) => {
-    console.log(req.body)
-    if (!req.body.pic) {
+    let { city, state, pic } = req.body
+    if (!pic) {
         // Default image if one is not provided
-        req.body.pic = 'http://placekitten.com/400/400'
+        pic = 'http://placekitten.com/400/400'
     }
-    if (!req.body.city) {
-        req.body.city = 'Anytown'
+    if (!city) {
+        city = 'Anytown'
     }
-    if (!req.body.state) {
-        req.body.state = 'USA'
+    if (!state) {
+        state = 'USA'
     }
     places.push(req.body)
     res.redirect('/places')
 })
 
-// DELETE
-router.delete('/:id', (req, res) => {
-    let id = Number(req.params.id)
-    if (isNaN(id)) {
-        res.render('error404')
-    }
-    else if (!places[id]) {
-        res.render('error404')
-    }
-    else {
-        places.splice(id, 1)
-        res.redirect('/places')
-    }
-})
+
 
 // PUT
 router.put('/:id', (req, res) => {
@@ -98,7 +78,22 @@ router.put('/:id', (req, res) => {
 
         // Save the new data into places[id]
         places[id] = req.body
-        res.redirect(`/places`)
+        res.redirect(`/places/${id}`)
+    }
+})
+
+// DELETE
+router.delete('/:id', (req, res) => {
+    let id = Number(req.params.id)
+    if (isNaN(id)) {
+        res.render('error404')
+    }
+    else if (!places[id]) {
+        res.render('error404')
+    }
+    else {
+        places.splice(id, 1)
+        res.redirect('/places')
     }
 })
 
