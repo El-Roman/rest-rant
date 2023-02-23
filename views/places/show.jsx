@@ -9,12 +9,20 @@ function show({ place, id }) {
                 <h1>{place.name}</h1>
                 <div>
                     <img src={place.pic} alt={place.name} />
+                    <h3>
+                        Located in {place.city}, {place.state}
+                    </h3>
                 </div>
                 <div>
                     <h2>Rating</h2>
                     <p>Not rated yet</p>
                     <h2>Description</h2>
-                    <p>Located in {place.city}, {place.state}</p>
+                    <h3>
+                        {place.showEstablished()}
+                    </h3>
+                    <h4>
+                        Serving {place.cuisines}
+                    </h4>
                 </div>
                 <div>
                     <h2>Comments</h2>
