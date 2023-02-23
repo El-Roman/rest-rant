@@ -14,6 +14,10 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+    if (!req.body.pic) {
+        req.body.pic = './images/tokyo-ramen.jpg'
+    }
+
     db.Place.create(req.body)
         .then(() => {
             res.redirect('/places')
