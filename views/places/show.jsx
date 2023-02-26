@@ -8,20 +8,59 @@ function show({ place, id }) {
             No comments yet!
         </h3>
     )
+    let rating = (
+        <h3 className="inactive">
+            Not rated yet!
+        </h3>
+    )
+
     if (place.comments.length) {
-        comments = place.comments.map(c => {
+        let sumRatings = place.comments.reduce((total, comment) => {
+            return total + comment.stars
+        }, 0)
+        let averageRating = Math.round(sumRatings / place.comments.length)
+        let stars = ""
+        for (let i = 0; i < averageRating; i++) {
+            stars += "⭐"
+        }
+        rating = (
+            <h3>
+                {stars}
+            </h3>
+        )
+        comments = place.comments.map((comment, index) => {
             return (
-                <div className="border">
-                    <h2 className='rant'>{c.rant ? 'Rant!' : 'Rave!'}</h2>
-                    <h4>{c.content}</h4>
+                <div key={index} className="border col-md-4">
+                    <h2 className="rant mt-2">
+                        {comment.rant ? "Rant! 😡" : "Rave! 😻"}
+                    </h2>
+                    <h4>{comment.content}</h4>
                     <h3>
-                        <stong>- {c.author}</stong>
+                        <strong>- {comment.author}</strong>
                     </h3>
-                    <h4>Rating: {c.stars}</h4>
+                    <h4>Rating: {comment.stars}</h4>
+                    <form action={`/places/${place._id}/comment/${comment._id}?_method=DELETE`} method="POST">
+                        <input className="mb-2 btn btn-danger" type="submit" value="Delete" />
+                    </form>
                 </div>
             )
         })
     }
+
+    // if (place.comments.length) {
+    //     comments = place.comments.map(c => {
+    //         return (
+    //             <div className="border">
+    //                 <h2 className='rant'>{c.rant ? 'Rant!' : 'Rave!'}</h2>
+    //                 <h4>{c.content}</h4>
+    //                 <h3>
+    //                     <stong>- {c.author}</stong>
+    //                 </h3>
+    //                 <h4>Rating: {c.stars}</h4>
+    //             </div>
+    //         )
+    //     })
+    // }
 
     return (
         <Def>
@@ -43,20 +82,40 @@ function show({ place, id }) {
                     <h4>
                         Serving {place.cuisines}
                     </h4>
+                    <div>
+                        <a href={`/places/${id}/edit`} className="btn btn-warning">
+                            Edit
+                        </a>
+
+                        <form method="POST" action={`/places/${id}?_method=DELETE`}>
+                            <button type="submit" className="btn btn-danger">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
                 </div>
                 <div>
                     <h2>Comments</h2>
                     {comments}
-                </div>
-                <div>
-                    <a href={`/places/${id}/edit`} className="btn btn-warning">
-                        Edit
-                    </a>
-
-                    <form method="POST" action={`/places/${id}?_method=DELETE`}>
-                        <button type="submit" className="btn btn-danger">
-                            Delete
-                        </button>
+                    <form className="row justify-content-md-center" action={`/places/${place._id}/comment`} method="POST">
+                        <div className="form-group col-md-4 mt-2">
+                            <label htmlFor="author">Name: </label>
+                            <input className="form-control" type="text" id="author" name="author" placeholder="Name Here!" />
+                        </div>
+                        <div className="form-group col-md-4 mt-2">
+                            <label htmlFor="stars">Rating: </label>
+                            <input className="form-control" type="range" step="0.5" min="1" max="5" id="stars" name="stars" />
+                        </div>
+                        <div className="form-group col-md-4 mt-2">
+                            <label htmlFor="rant">Is this a rant?</label>
+                            <br />
+                            <input type="checkbox" id="rant" name="rant" />
+                        </div>
+                        <div className="form-group col-md-4 mt-2">
+                            <label htmlFor="content">Comment: </label>
+                            <textarea className="form-control" type="text" id="content" name="content" placeholder="I love this place! ..."></textarea>
+                            <button className="btn btn-primary mt-2" type="submit">Submit</button>
+                        </div>
                     </form>
                 </div>
             </main>

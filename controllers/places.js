@@ -58,7 +58,7 @@ router.get('/:id/edit', (req, res) => {
 })
 
 router.post('/:id/rant', (req, res) => {
-    res.send('GET /places/:id/rant stub')
+    res.send('GET /places/:id/rant/:rantId stub')
 })
 
 router.delete('/:id/rant/:rantId', (req, res) => {
