@@ -33,10 +33,10 @@ function new_form() {
                     </div>
                     <div className="form-group">
                         <label htmlFor="founded">Founded Year</label>
-                        <input type="number" className="form-control" id="founded" name="founded" value={new Date().getFullYear} />
+                        <input type="number" className="form-control" id="founded" name="founded" defaultValue={new Date().getFullYear} />
                     </div>
 
-                    <input className="btn btn-primary" type="submit" value="Add Place" />
+                    <input className="btn btn-primary" type="submit" defaultValue="Add Place" />
                 </form>
 
             </main>

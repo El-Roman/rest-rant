@@ -3,6 +3,26 @@ const Def = require('../default')
 
 function show({ place, id }) {
     console.log(place, id)
+    let comments = (
+        <h3 className="inactive">
+            No comments yet!
+        </h3>
+    )
+    if (place.comments.length) {
+        comments = place.comments.map(c => {
+            return (
+                <div className="border">
+                    <h2 className='rant'>{c.rant ? 'Rant!' : 'Rave!'}</h2>
+                    <h4>{c.content}</h4>
+                    <h3>
+                        <stong>- {c.author}</stong>
+                    </h3>
+                    <h4>Rating: {c.stars}</h4>
+                </div>
+            )
+        })
+    }
+
     return (
         <Def>
             <main>
@@ -26,7 +46,7 @@ function show({ place, id }) {
                 </div>
                 <div>
                     <h2>Comments</h2>
-                    <p>No comments yet!</p>
+                    {comments}
                 </div>
                 <div>
                     <a href={`/places/${id}/edit`} className="btn btn-warning">
