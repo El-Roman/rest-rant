@@ -25,7 +25,7 @@ function show({ place, id }) {
         }
         rating = (
             <h3>
-                {stars}
+                {stars} stars
             </h3>
         )
         comments = place.comments.map((comment, index) => {
@@ -47,20 +47,6 @@ function show({ place, id }) {
         })
     }
 
-    // if (place.comments.length) {
-    //     comments = place.comments.map(c => {
-    //         return (
-    //             <div className="border">
-    //                 <h2 className='rant'>{c.rant ? 'Rant!' : 'Rave!'}</h2>
-    //                 <h4>{c.content}</h4>
-    //                 <h3>
-    //                     <stong>- {c.author}</stong>
-    //                 </h3>
-    //                 <h4>Rating: {c.stars}</h4>
-    //             </div>
-    //         )
-    //     })
-    // }
 
     return (
         <Def>
