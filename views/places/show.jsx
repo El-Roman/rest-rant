@@ -1,8 +1,8 @@
 const React = require('react')
 const Def = require('../default')
 
-function show({ place, id }) {
-    console.log(place, id)
+function show({ place }) {
+    console.log(place)
     let comments = (
         <h3 className="inactive">
             No comments yet!
@@ -60,6 +60,7 @@ function show({ place, id }) {
                 </div>
                 <div>
                     <h2>Rating</h2>
+                    {rating}
                     <p>Not rated yet</p>
                     <h2>Description</h2>
                     <h3>
@@ -69,11 +70,11 @@ function show({ place, id }) {
                         Serving {place.cuisines}
                     </h4>
                     <div>
-                        <a href={`/places/${id}/edit`} className="btn btn-warning">
+                        <a href={`/places/${place._id}/edit`} className="btn btn-warning">
                             Edit
                         </a>
 
-                        <form method="POST" action={`/places/${id}?_method=DELETE`}>
+                        <form method="POST" action={`/places/${place._id}?_method=DELETE`}>
                             <button type="submit" className="btn btn-danger">
                                 Delete
                             </button>
